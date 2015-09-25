@@ -80,8 +80,9 @@ class Environment(dict):
 
     if platform.system() == 'Darwin':
         arduino_dist_dir_guesses.insert(0, '/Applications/Arduino.app/Contents/Resources/Java')
+        arduino_dist_dir_guesses.insert(0, '/Applications/Arduino.app/Contents/Resources/Java')
 
-    default_board_model = 'uno'
+    default_board_model = 'leonardo'
     ino = sys.argv[0]
 
     def dump(self):
