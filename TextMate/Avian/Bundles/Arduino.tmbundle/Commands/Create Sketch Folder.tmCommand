@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby18 -wKU
+
+#"$DIALOG" filepanel --title "Create a sketch folder" --prompt Create --canChooseDirectories 1 --canChooseFiles 0
+
+require ENV['TM_SUPPORT_PATH'] + '/lib/ui' 
+sketchName = TextMate::UI.request_string(:title =&gt; "Create sketch folder", :prompt =&gt; 
+"Enter sketch folder name")
+
+sketchPath=ENV['ARDUINO_SKETCH_HOME']+'/'+sketchName
+#system('echo '+sketchPath)
+
+system('mkdir "'+sketchPath+'"')
+system('cd "'+sketchPath + '" &amp;&amp; '+'/usr/local/bin/ino init')
+
+openFile=sketchPath+'/src/sketch.ino'
+
+system('mate "'+sketchPath+'"')</string>
+	<key>input</key>
+	<string>none</string>
+	<key>name</key>
+	<string>Create Sketch Folder</string>
+	<key>outputLocation</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.c++.arduino</string>
+	<key>uuid</key>
+	<string>EA9E2221-AD4E-4E24-954F-94FE5BD57B55</string>
+</dict>
+</plist>

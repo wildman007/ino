@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>changed</key>
+	<dict>
+		<key>command</key>
+		<string>#!/usr/bin/env ruby
+
+tm_word = STDIN.read
+html_file = nil
+
+arduino_dir = "/Applications/Arduino.app/Contents/Java"
+reference_dir = "#{arduino_dir}/reference/arduino.cc/en/Reference"
+keywords_file = "#{arduino_dir}/lib/keywords.txt"
+
+keywords = open(keywords_file).each_line.map {|line| line.split}
+keywords.reject! do |kw|
+	kw.size &lt; 2 or kw.first == "#"
+end
+keywords.each {|kw| html_file = "#{reference_dir}/#{kw.last}.html" if tm_word == kw.first }
+
+if html_file
+	begin
+		css = &lt;&lt;-NEWCSS
+			iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+NEWCSS
+		html = "&lt;html&gt;&lt;head&gt;&lt;style&gt;#{css}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;iframe src='file://#{html_file}'&gt;&lt;/body&gt;"
+		puts html
+
+	rescue Errno::ENOENT
+		# do nothing
+	end
+		
+	exit
+end
+
+puts "No documentation found for '#{tm_word}'!"</string>
+		<key>inputFormat</key>
+		<string>text</string>
+		<key>outputCaret</key>
+		<string>afterOutput</string>
+		<key>outputFormat</key>
+		<string>html</string>
+		<key>outputLocation</key>
+		<string>newWindow</string>
+		<key>version</key>
+		<integer>2</integer>
+	</dict>
+	<key>deleted</key>
+	<array>
+		<string>output</string>
+	</array>
+	<key>isDelta</key>
+	<true/>
+	<key>uuid</key>
+	<string>26732C56-E39B-419D-8D1F-815CD9FA7C32</string>
+</dict>
+</plist>

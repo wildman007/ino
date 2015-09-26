@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>changed</key>
+	<dict>
+		<key>command</key>
+		<string>#!/usr/bin/env bash
+cd "${TM_DIRECTORY}"
+cd ..
+echo "&lt;HTML&gt;&lt;BODY&gt;"
+echo "&lt;H3&gt;Building ${TM_FILENAME}&lt;/h3&gt;"
+echo "&lt;PRE&gt;"
+/usr/local/bin/ino build
+if [ $? -eq 0 ]
+then
+	echo "&lt;/PRE&gt;&lt;br&gt;"
+	echo "&lt;b&gt;All done&lt;/b&gt;"
+else
+	echo "&lt;/PRE&gt;&lt;br&gt;"
+  	echo "&lt;b style='color: red'&gt;ERROR!&lt;/b&gt;"
+fi
+echo "&lt;/HTML&gt;&lt;/BODY&gt;"</string>
+		<key>inputFormat</key>
+		<string>text</string>
+		<key>outputCaret</key>
+		<string>afterOutput</string>
+		<key>outputFormat</key>
+		<string>html</string>
+		<key>outputLocation</key>
+		<string>newWindow</string>
+		<key>version</key>
+		<integer>2</integer>
+	</dict>
+	<key>deleted</key>
+	<array>
+		<string>output</string>
+	</array>
+	<key>isDelta</key>
+	<true/>
+	<key>uuid</key>
+	<string>B901B2C1-83A7-48E6-BA88-00220566836C</string>
+</dict>
+</plist>
